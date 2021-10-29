@@ -1,10 +1,11 @@
 import { IProvider } from "../type/provider";
+import { MenuProvider } from "./menu";
 
 const Providers = ({children}: IProvider) => {
     return (
-        <>
-        {children}
-        </>
+        <MenuProvider>
+            {children}
+        </MenuProvider>
     )
 };
 
