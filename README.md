@@ -1,1 +1,11 @@
-# react-entrega-s5-template-hamburgueria-2.0-com-typescript-e-json-server
+# Hamburgueria com TypeScript e API
+
+## Bibliotecas utilizadas
+
+react-toastify<br />
+react-hook-form<br />
+yup<br />
+@hookform/resolvers<br />
+styled-components<br />
+axios<br />
+material-ui
