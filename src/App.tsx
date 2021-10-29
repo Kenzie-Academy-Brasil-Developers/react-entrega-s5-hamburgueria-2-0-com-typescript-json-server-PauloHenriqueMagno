@@ -1,4 +1,3 @@
-import './App.css';
 import Routes from './routes';
 import { ToastContainer } from "react-toastify"
 
