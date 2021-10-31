@@ -1,11 +1,14 @@
 import { IProvider } from "../type/provider";
+import { LoginProvider } from "./login";
 import { MenuProvider } from "./menu";
 
 const Providers = ({children}: IProvider) => {
     return (
-        <MenuProvider>
-            {children}
-        </MenuProvider>
+        <LoginProvider>
+            <MenuProvider>
+                {children}
+            </MenuProvider>
+        </LoginProvider>
     )
 };
 

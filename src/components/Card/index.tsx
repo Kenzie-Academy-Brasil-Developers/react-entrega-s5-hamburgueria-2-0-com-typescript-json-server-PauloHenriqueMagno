@@ -9,7 +9,7 @@ export const CardProduct = (
     return (
         <Card key={id}>
             <Image>
-                <img src={src} alt={name} />
+                <img src={src} alt={name} loading="lazy" />
             </Image>
             <p className="name">{name}</p>
             <p className="category">{category}</p>

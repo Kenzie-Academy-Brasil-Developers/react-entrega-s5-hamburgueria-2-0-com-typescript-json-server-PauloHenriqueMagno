@@ -14,18 +14,19 @@ import {
 } from "@material-ui/icons";
 
 import { Badge } from "@material-ui/core";
+import Logo from "../Logo";
 
 const HeaderComponent = () => {
     const history = useHistory();
 
     const redirect = (string: string) => {
-        history.push(string)
-    }
+        history.push(string);
+    };
 
     return (
         <Header>
             <HeaderContainer>
-                <h1 onClick={() => redirect("/")}>Hamburgueria</h1>
+                <Logo />
                 <nav>
                     <SearchDiv>
                         <input
@@ -40,7 +41,7 @@ const HeaderComponent = () => {
                                 <ShoppingCart />
                             </Badge>
                         </IconButton>
-                    <IconButton onClick={() => redirect("/")}>
+                    <IconButton onClick={() => redirect("/login")}>
                         <ExitToApp />
                     </IconButton>
                 </nav>

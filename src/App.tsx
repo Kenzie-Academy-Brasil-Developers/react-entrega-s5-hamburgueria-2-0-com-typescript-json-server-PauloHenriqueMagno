@@ -1,11 +1,10 @@
 import Routes from './routes';
 import { ToastContainer } from "react-toastify"
-import HeaderComponent from './components/Header';
+import 'react-toastify/dist/ReactToastify.css';
 
 function App() {
   return (
     <>
-      <HeaderComponent />
       <Routes />
       <ToastContainer
         position="top-right"
