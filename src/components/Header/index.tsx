@@ -15,6 +15,7 @@ import {
 
 import { Badge } from "@material-ui/core";
 import Logo from "../Logo";
+import { toast } from "react-toastify";
 
 const HeaderComponent = () => {
     const history = useHistory();
@@ -22,6 +23,12 @@ const HeaderComponent = () => {
     const redirect = (string: string) => {
         history.push(string);
     };
+
+    const logout = () => {
+        redirect("/login");
+        localStorage.removeItem("@BurguerKenzie:token");
+        toast.info("Conta desconectada");
+    }
 
     return (
         <Header>
@@ -41,7 +48,7 @@ const HeaderComponent = () => {
                                 <ShoppingCart />
                             </Badge>
                         </IconButton>
-                    <IconButton onClick={() => redirect("/login")}>
+                    <IconButton onClick={() => logout()}>
                         <ExitToApp />
                     </IconButton>
                 </nav>

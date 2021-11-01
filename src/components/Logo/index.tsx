@@ -1,13 +1,16 @@
 import { useHistory } from "react-router";
-import { LogoStyled } from "./styled";
+import {
+    LogoStyled,
+    LogoDiv
+} from "./styled";
 
 const Logo = () => {
     const history = useHistory()
 
     return (
-        <div onClick={()=> history.push("/")}>
+        <LogoDiv onClick={()=> history.push("/")}>
             <LogoStyled>Burguer <span>Kenzie</span></LogoStyled>
-        </div>
+        </LogoDiv>
     )
 };
 

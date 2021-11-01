@@ -11,8 +11,10 @@ import {
 } from "./styled"
 
 import { TextField } from "@material-ui/core";
-import { useLoginContext } from "../../providers/login";
 import Aside from "../../components/Aside";
+import api from "../../services/api";
+import { toast } from "react-toastify";
+import { useEffect } from "react";
 
 interface ILogin{
     email: string,
@@ -22,16 +24,24 @@ interface ILogin{
 export const Login = () => {   
     const history = useHistory()
 
-    const { Login }: any = useLoginContext()
-
     const redirect = (string: string) => {
         history.push(string);
     };
 
     const onSubmit = (data: ILogin)=> {
-        Login(data);
-        redirect("/");
-    }
+        localStorage.removeItem("@BurguerKenzie:token");
+
+        api
+            .post("/login", data)
+            .then(response => {
+                localStorage.setItem("@BurguerKenzie:token", response.data.accessToken);
+                redirect("/")
+                toast.success("Bem vindo, " + response.data.user.name);
+            })
+            .catch(err => {
+                toast.error("E-mail ou senha incorreto");
+            });
+    };
 
     const schema = yup.object().shape({
         email: yup.string().required("E-mail é obrigatório").email("Insira um e-mail valido"),
@@ -44,6 +54,12 @@ export const Login = () => {
         formState: { errors },
     } = useForm<ILogin>({ resolver: yupResolver(schema) });
     
+    useEffect(()=>{
+        if(!!localStorage.getItem("@BurguerKenzie:token")){
+            redirect("/")
+        }
+    },[])
+
     return (        
         <LoginMain>
             <LoginForm
@@ -66,7 +82,7 @@ export const Login = () => {
                     fullWidth
                     {...register("password")}
                     helperText={errors.password?.message}
-                    color={errors.email? "warning": "success"}
+                    color={errors.password? "warning": "success"}
                 />
                 <ButtonStyled type="submit">
                     Logar
@@ -74,7 +90,7 @@ export const Login = () => {
 
                 <p>Crie sua conta para saborear muitas delícias e matar sua fome!</p>
 
-                <ButtonRedirectStyled onClick={() => redirect("/register")}>
+                <ButtonRedirectStyled onClick={() => redirect("/signup")}>
                     Cadastrar
                 </ButtonRedirectStyled>
             </LoginForm>

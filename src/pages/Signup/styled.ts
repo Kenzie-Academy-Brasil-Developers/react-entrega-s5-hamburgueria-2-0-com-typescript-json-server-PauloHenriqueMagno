@@ -1,23 +1,24 @@
 import styled from "styled-components";
 
-export const LoginMain = styled.main`
+export const SignupMain = styled.main`
     width: 100%;
     height: 100vh;
     max-width: 1200px;
-    padding: 15px;
+    padding: 15px 30px;
     display: flex;
-    flex-direction: column-reverse;
+    flex-direction: column;
     align-items: center;
     justify-content: center;
-    margin: auto;
+    margin: 30px auto;
 
     @media (min-width: 769px){
         flex-direction: row;
-        gap: 15px
-    }
+        margin: 0 auto;
+        gap: 15px;
+    };
 `;
 
-export const LoginForm = styled.form`
+export const SignupForm = styled.form`
     width: 100%;
     max-width: 500px;
     display: flex;
@@ -30,6 +31,8 @@ export const LoginForm = styled.form`
     margin: auto;
 
     header {
+        display: flex;
+        justify-content: space-between;
         width: 100%;
 
         h3 {
@@ -39,6 +42,17 @@ export const LoginForm = styled.form`
             font-size: 18px;
             line-height: 24px;
             text-align: start;
+        };
+
+        p {
+            font-family: Inter;
+            font-style: normal;
+            font-weight: 500;
+            font-size: 14px;
+            line-height: 22px;
+            text-decoration-line: underline;
+            color: #828282;
+            cursor: pointer;
         };
     };
 
@@ -50,30 +64,10 @@ export const LoginForm = styled.form`
         line-height: 18px;
         text-align: center;
         color: #999999;
-    }
-`;
-
-export const ButtonStyled = styled.button`
-    width: 100%;
-    padding: 18px 30px;
-    font-family: "Inter";
-    font-style: normal;
-    font-weight: 600;
-    font-size: 16px;
-    line-height: 28px;
-    text-align: center;
-    color: #FFFFFF;
-    background: #93D7AF;
-    border-radius: 6px;
-    border: none;
-    cursor: pointer;
-
-    &:hover {
-        background-color: #27AE60;
     };
 `;
 
-export const ButtonRedirectStyled = styled.button`
+export const ButtonStyled = styled.button`
     width: 100%;
     padding: 18px;
     font-family: "Inter";
@@ -91,5 +85,5 @@ export const ButtonRedirectStyled = styled.button`
     &:hover {
         color: #E0E0E0;
         background-color: #828282;
-    };
+    }
 `;
