@@ -5,10 +5,10 @@ export interface IProvider{
 };
 
 export interface IProduct{
-    id: string,
+    id: number,
     name: string,
     src: string,
-    price: any,
+    price: number,
     category: string,
     amount?: any
 }

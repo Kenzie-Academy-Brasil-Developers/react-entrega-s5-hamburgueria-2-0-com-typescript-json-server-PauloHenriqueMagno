@@ -8,17 +8,19 @@ import {
 } from "./styled";
 
 import {
-    ShoppingCart,
     ExitToApp,
     Search
 } from "@material-ui/icons";
 
-import { Badge } from "@material-ui/core";
 import Logo from "../Logo";
 import { toast } from "react-toastify";
+import Cart from "../Cart";
+import { useCartContext } from "../../providers/cart";
 
 const HeaderComponent = () => {
     const history = useHistory();
+
+    const { setCart } = useCartContext()
 
     const redirect = (string: string) => {
         history.push(string);
@@ -26,9 +28,13 @@ const HeaderComponent = () => {
 
     const logout = () => {
         redirect("/login");
-        localStorage.removeItem("@BurguerKenzie:token");
-        toast.info("Conta desconectada");
-    }
+        const token = localStorage.getItem("@BurguerKenzie:token")
+        if(!!token){
+            localStorage.removeItem("@BurguerKenzie:token");
+            toast.info("Conta desconectada");
+            setCart([])
+        };
+    };
 
     return (
         <Header>
@@ -43,11 +49,7 @@ const HeaderComponent = () => {
                             <Search />
                         </SearchButton>
                     </SearchDiv>
-                        <IconButton onClick={() => redirect("/")}>
-                            <Badge badgeContent={8} color="primary">
-                                <ShoppingCart />
-                            </Badge>
-                        </IconButton>
+                    <Cart />
                     <IconButton onClick={() => logout()}>
                         <ExitToApp />
                     </IconButton>

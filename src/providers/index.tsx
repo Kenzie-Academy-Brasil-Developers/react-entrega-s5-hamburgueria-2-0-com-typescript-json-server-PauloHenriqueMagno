@@ -1,11 +1,14 @@
 import { IProvider } from "../type/provider";
+import { CartProvider } from "./cart";
 import { MenuProvider } from "./menu";
 
 const Providers = ({children}: IProvider) => {
     return (
-        <MenuProvider>
-            {children}
-        </MenuProvider>
+        <CartProvider>
+            <MenuProvider>
+                {children}
+            </MenuProvider>
+        </CartProvider>
     )
 };
 

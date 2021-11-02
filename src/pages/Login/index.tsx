@@ -15,6 +15,7 @@ import Aside from "../../components/Aside";
 import api from "../../services/api";
 import { toast } from "react-toastify";
 import { useEffect } from "react";
+import { useCartContext } from "../../providers/cart";
 
 interface ILogin{
     email: string,
@@ -24,19 +25,24 @@ interface ILogin{
 export const Login = () => {   
     const history = useHistory()
 
+    const { loadCart } = useCartContext()
+
     const redirect = (string: string) => {
         history.push(string);
     };
 
     const onSubmit = (data: ILogin)=> {
         localStorage.removeItem("@BurguerKenzie:token");
+        localStorage.removeItem("@BurguerKenzie:id");
 
         api
             .post("/login", data)
             .then(response => {
                 localStorage.setItem("@BurguerKenzie:token", response.data.accessToken);
+                localStorage.setItem("@BurguerKenzie:id", response.data.user.id);
                 redirect("/")
                 toast.success("Bem vindo, " + response.data.user.name);
+                loadCart()
             })
             .catch(err => {
                 toast.error("E-mail ou senha incorreto");

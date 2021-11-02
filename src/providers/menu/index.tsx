@@ -7,27 +7,23 @@ interface IMenuProvider{
     menu: IProduct[];
 };
 
-export const MenuContext = createContext<IMenuProvider>({} as IMenuProvider);
-
-export const useMenuContext = () => {
-    const context = useContext(MenuContext)
-
-    return context
-}
+const MenuContext = createContext<IMenuProvider>({} as IMenuProvider);
 
 export const MenuProvider = ({children}: IProvider) => {
-    const [menu, setMenu] = useState<IProduct[]>([]);
-
+    const [menu, setMenu] = useState([]);
+    
     useEffect(()=>{
         api
-            .get("/menu")
-            .then(response => setMenu(response.data))
-            .catch(err => toast.error("Erro em carregar o cardapio"))
+        .get("/menu")
+        .then(response => setMenu(response.data))
+        .catch(err => toast.error("Erro em carregar o cardapio"))
     },[])
-
+    
     return (
         <MenuContext.Provider value={{ menu }}>
             {children}
         </MenuContext.Provider>
     )
-}
+};
+
+export const useMenuContext = () => useContext(MenuContext);
