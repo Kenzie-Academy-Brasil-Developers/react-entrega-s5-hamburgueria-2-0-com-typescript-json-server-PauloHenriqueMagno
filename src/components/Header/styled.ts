@@ -14,7 +14,8 @@ export const HeaderContainer = styled.div`
             display: none;
         };
         .searchForm {
-            display: flex
+            display: flex;
+            margin: 0 0 0 15px;
         };
     };
 

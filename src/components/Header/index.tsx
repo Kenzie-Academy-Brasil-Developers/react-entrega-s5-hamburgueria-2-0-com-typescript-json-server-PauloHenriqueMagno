@@ -33,7 +33,6 @@ const HeaderComponent = () => {
 
     const logout = () => {
         redirect("/login");
-
         const token = localStorage.getItem("@BurguerKenzie:token")
         if(!!token){
             localStorage.removeItem("@BurguerKenzie:token");

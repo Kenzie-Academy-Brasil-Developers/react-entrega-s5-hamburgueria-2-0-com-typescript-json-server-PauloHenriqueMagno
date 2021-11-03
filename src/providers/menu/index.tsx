@@ -16,9 +16,9 @@ export const MenuProvider = ({children}: IProvider) => {
 
     useEffect(()=>{
         api
-            .get("/menu")
-            .then(response => setMenu(response.data))
-            .catch(err => toast.error("Erro em carregar o cardapio"))
+        .get("/menu")
+        .then(response => setMenu(response.data))
+        .catch(err => toast.error("Erro em carregar o cardapio"))
     },[])
 
     const getMenu = () =>{

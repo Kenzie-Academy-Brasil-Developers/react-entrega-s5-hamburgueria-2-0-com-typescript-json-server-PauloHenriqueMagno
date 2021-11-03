@@ -7,6 +7,7 @@ export const ProductList = styled.ul`
     grid-template-columns: 1fr;
     gap: 5px;
     margin: auto;
+    padding: 15px;
 
     @media (min-width: 400px){
         grid-template-columns: 1fr 1fr;
