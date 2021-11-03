@@ -1,17 +1,13 @@
-<<<<<<< Updated upstream
-=======
 import { useEffect } from "react";
 import { useHistory } from "react-router";
 import { toast } from "react-toastify";
->>>>>>> Stashed changes
 import { CardProduct } from "../../components/Card";
 import { useMenuContext } from "../../providers/menu";
+import api from "../../services/api";
 import { ProductList } from "./styled";
 
 const Home = () => {
     const { menu } = useMenuContext();
-<<<<<<< Updated upstream
-=======
     const history = useHistory()
     
     useEffect(() => {
@@ -34,7 +30,6 @@ const Home = () => {
             history.push("/login")
         }
     }, []);
->>>>>>> Stashed changes
 
     return (
         <>

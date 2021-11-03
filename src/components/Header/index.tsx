@@ -50,7 +50,7 @@ const HeaderComponent = () => {
                 </div>
                 <nav>
                     <SearchForm
-                        className={ isFocus? "searchForm mobile": "searchForm"}
+                        className="searchForm"
                         onSubmit={(e)=> {
                             setIsFocus(false);
                             e.preventDefault()

@@ -10,15 +10,9 @@ interface IMenuProvider{
 
 export const MenuContext = createContext<IMenuProvider>({} as IMenuProvider);
 
-export const useMenuContext = () => {
-    const context = useContext(MenuContext)
-
-    return context
-}
-
 export const MenuProvider = ({children}: IProvider) => {
-<<<<<<< Updated upstream
-    const [menu, setMenu] = useState<IProduct[]>([]);
+    const [menu, setMenu] = useState([]);
+    const [saveMenu, setSaveMenu] = useState([]);
 
     useEffect(()=>{
         api
@@ -26,10 +20,6 @@ export const MenuProvider = ({children}: IProvider) => {
             .then(response => setMenu(response.data))
             .catch(err => toast.error("Erro em carregar o cardapio"))
     },[])
-
-=======
-    const [menu, setMenu] = useState([]);
-    const [saveMenu, setSaveMenu] = useState([]);
 
     const getMenu = () =>{
         api
@@ -57,17 +47,11 @@ export const MenuProvider = ({children}: IProvider) => {
         getMenu();
     },[]);
     
->>>>>>> Stashed changes
     return (
         <MenuContext.Provider value={{ menu, SearchMenu }}>
             {children}
         </MenuContext.Provider>
-<<<<<<< Updated upstream
-    )
-}
-=======
     );
 };
 
 export const useMenuContext = () => useContext(MenuContext);
->>>>>>> Stashed changes
