@@ -4,43 +4,81 @@ import {
     HeaderContainer,
     IconButton,
     SearchButton,
-    SearchDiv,
+    SearchForm,
+    OpenSearch
 } from "./styled";
 
 import {
-    ShoppingCart,
     ExitToApp,
     Search
 } from "@material-ui/icons";
 
-import { Badge } from "@material-ui/core";
+import Logo from "../Logo";
+import { toast } from "react-toastify";
+import Cart from "../Cart";
+import { useCartContext } from "../../providers/cart";
+import { useMenuContext } from "../../providers/menu";
+import { useState } from "react";
 
 const HeaderComponent = () => {
     const history = useHistory();
 
+    const [ isFocus, setIsFocus ] = useState(false)
+    const { setCart } = useCartContext()
+    const { SearchMenu } = useMenuContext()
+
     const redirect = (string: string) => {
-        history.push(string)
-    }
+        history.push(string);
+    };
+
+    const logout = () => {
+        redirect("/login");
+
+        const token = localStorage.getItem("@BurguerKenzie:token")
+        if(!!token){
+            localStorage.removeItem("@BurguerKenzie:token");
+            toast.info("Conta desconectada");
+            setCart([])
+        };
+    };
 
     return (
         <Header>
-            <HeaderContainer>
-                <h1 onClick={() => redirect("/")}>Hamburgueria</h1>
+            <HeaderContainer className={isFocus? "search": ""}>
+                <div className="hiddenOnFocus">
+                    <Logo />
+                </div>
                 <nav>
-                    <SearchDiv>
+                    <SearchForm
+                        className={ isFocus? "searchForm mobile": "searchForm"}
+                        onSubmit={(e)=> {
+                            setIsFocus(false);
+                            e.preventDefault()
+                        }}
+                    >
                         <input
                             placeholder="Digitar pesquisa"
+                            onChange={(e)=> SearchMenu(e.currentTarget.value)}
                         />
-                        <SearchButton>
+                        <SearchButton
+                            type="submit"
+                        >
                             <Search />
                         </SearchButton>
-                    </SearchDiv>
-                        <IconButton onClick={() => redirect("/")}>
-                            <Badge badgeContent={8} color="primary">
-                                <ShoppingCart />
-                            </Badge>
-                        </IconButton>
-                    <IconButton onClick={() => redirect("/")}>
+                    </SearchForm>
+                    <OpenSearch
+                        className="hiddenOnFocus mobile"
+                        onClick={()=> setIsFocus(true)}
+                    >
+                        <Search />    
+                    </OpenSearch>
+                    <div className="hiddenOnFocus">
+                        <Cart />
+                    </div>
+                    <IconButton
+                        className="hiddenOnFocus"
+                        onClick={() => logout()}
+                    >
                         <ExitToApp />
                     </IconButton>
                 </nav>

@@ -9,6 +9,15 @@ export const HeaderContainer = styled.div`
     justify-content: space-between;
     align-items: center;
 
+    &.search {
+        .hiddenOnFocus {
+            display: none;
+        };
+        .searchForm {
+            display: flex
+        };
+    };
+
     h1 {
         cursor: pointer;
         padding: 5px;
@@ -20,6 +29,26 @@ export const HeaderContainer = styled.div`
         align-items: center;
         justify-content: center;
         padding: 5px 0
+    };
+
+    @media (min-width: 769px){
+        &.search {
+            .searchForm {
+                display: flex
+            }
+            .hiddenOnFocus {
+                display: block;
+            };
+            .hiddenOnFocus.mobile {
+                display: none;
+            };
+        };
+        .searchForm {
+                display: flex
+        }
+        .hiddenOnFocus.mobile {
+                display: none;
+        };
     };
 `;
 
@@ -50,43 +79,64 @@ export const IconButton = styled.button`
     };
 `;
 
-export const SearchDiv = styled.div`
+export const SearchForm = styled.form`
+    display: none;
+    justify-content: center;
+    align-items: center;
+    background-color: #FFFF;
+    border: 2px solid #E0E0E0;
+    border-radius: 5px;
+    padding: 5px;
+    margin: 0 5px;
+    width: 93vw;
 
+    &:focus-within {
+        border: 2px solid #333333;
+    }
+    
     input {
-        display: none;
+        display: block;
+        border: none;
+        font-size: 1rem;
+        width: 93%;
+        
+        &::placeholder {
+            color: #E0E0E0;
+        }
+        &:focus {
+            outline: none;
+        };
     };
 
     @media (min-width: 769px){
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        background-color: #FFFF;
-        border: 2px solid #E0E0E0;
-        border-radius: 5px;
-        padding: 5px;
-        margin: 0 5px;
-        
-        &:focus-within {
-            border: 2px solid #333333;
-            
-        }
-        
-        input {
-            display: block;
-            border: none;
-            font-size: 1rem;
-            
-            &::placeholder {
-                color: #E0E0E0;
-            }
-            &:focus {
-                outline: none;
-            };
-        };
+        width: inherit;
     }
-`
+`;
 
 export const SearchButton = styled.button`
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: none;
+    cursor: pointer;
+    border-radius: 100%;
+    padding: 7px;
+    
+    background-color: #27AE60;
+    border-radius: 5px;
+    padding: 4px;
+    
+    &:hover {
+        background-color: #168821;
+    };
+    
+    svg {
+        color: #FFFF;
+        font-size: 1.4rem;
+    };
+    `;
+
+export const OpenSearch = styled.button`
     display: flex;
     justify-content: center;
     align-items: center;
@@ -96,27 +146,12 @@ export const SearchButton = styled.button`
     border-radius: 100%;
     padding: 7px;
 
-    &:hover {
-        background-color: #BDBDBD;
-    };
-
     svg {
         color: #828282;
         font-size: 2rem;
     };
 
-    @media (min-width: 769px){
-        background-color: #27AE60;
-        border-radius: 5px;
-        padding: 4px;
-    
-        &:hover {
-            background-color: #168821;
-        };
-    
-        svg {
-            color: #FFFF;
-            font-size: 1.4rem;
-        };
-    }
+    &:hover {
+        background-color: #BDBDBD;
+    };
 `;
