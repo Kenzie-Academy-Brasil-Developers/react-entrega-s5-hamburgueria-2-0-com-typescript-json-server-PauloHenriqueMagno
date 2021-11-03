@@ -58,6 +58,9 @@ export const Header = styled.header`
     background-color: #F5F5F5;
     padding: 5px;
     margin-bottom: 15px;
+    position: sticky;
+    top: 0;
+    z-index: 100;
 `;
 
 export const IconButton = styled.button`
