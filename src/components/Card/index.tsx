@@ -15,8 +15,7 @@ import {
 export const CardProduct = (product: IProduct) => {
     const {id, name, src, price, category} = product
     const {
-        addToCart,
-        loadCart,
+        addToCart
     } = useCartContext();
 
     return (
@@ -32,7 +31,6 @@ export const CardProduct = (product: IProduct) => {
             <button
                 onClick={()=> {
                     addToCart(product);
-                    loadCart();
                 }}
             >
                 Adicionar
@@ -45,7 +43,6 @@ export const CardProductCart = (product: IProduct) => {
     const {id, name, src, price, amount} = product
     const {
         addToCart,
-        loadCart,
         removeFromCart,
         removeAmount
     } = useCartContext();
@@ -61,7 +58,6 @@ export const CardProductCart = (product: IProduct) => {
                     <IconButton
                         onClick={()=> {
                             removeFromCart(product);
-                            loadCart();
                         }}
                     >
                         <Delete />
@@ -72,8 +68,7 @@ export const CardProductCart = (product: IProduct) => {
                     <div className="buttons">
                         <IconButton
                             onClick={()=> {
-                                removeAmount(product, false)
-                                loadCart()
+                                removeAmount(product, false);
                             }}
                         >
                             <Remove />
@@ -83,8 +78,7 @@ export const CardProductCart = (product: IProduct) => {
                         </p>
                         <IconButton
                             onClick={()=> {
-                                addToCart(product, false)
-                                loadCart()
+                                addToCart(product, false);
                             }}
                         >
                             <Add />

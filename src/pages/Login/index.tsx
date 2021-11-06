@@ -25,7 +25,7 @@ interface ILogin{
 export const Login = () => {   
     const history = useHistory()
 
-    const { loadCart, setToken } = useCartContext()
+    const { setCart, setToken } = useCartContext()
 
     const redirect = (string: string) => {
         history.push(string);
@@ -38,12 +38,12 @@ export const Login = () => {
         api
             .post("/login", data)
             .then(response => {
-                localStorage.setItem("@BurguerKenzie:token", response.data.accessToken);
                 setToken(response.data.accessToken);
+                setCart(response.data.user.cart);
+                localStorage.setItem("@BurguerKenzie:token", response.data.accessToken);
                 localStorage.setItem("@BurguerKenzie:id", response.data.user.id);
-                redirect("/")
                 toast.success("Bem vindo, " + response.data.user.name);
-                loadCart()
+                redirect("/");
             })
             .catch(err => {
                 toast.error("E-mail ou senha incorreto");

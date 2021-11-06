@@ -27,7 +27,7 @@ const Cart = () => {
 
     const {
         cart,
-        clearCart
+        clearCart,
     } = useCartContext();
 
     const totalValue = () => {
@@ -45,10 +45,10 @@ const Cart = () => {
 
         cart.forEach(prod => {
             total += prod.amount
-        })
+        });
 
         return total;
-    }
+    };
 
     return (
         <div>
@@ -90,7 +90,9 @@ const Cart = () => {
                                     <p className="price">R$ {totalValue().toFixed(2)}</p>
                                 </div>
                                 <button
-                                    onClick={() => clearCart()}
+                                    onClick={() => {
+                                        clearCart();
+                                    }}
                                 >
                                     Remover todos
                                 </button>

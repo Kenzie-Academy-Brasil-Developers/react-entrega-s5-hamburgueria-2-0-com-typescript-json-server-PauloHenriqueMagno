@@ -33,11 +33,11 @@ const HeaderComponent = () => {
 
     const logout = () => {
         redirect("/login");
-        const token = localStorage.getItem("@BurguerKenzie:token")
+        setCart([]);
+        const token = localStorage.getItem("@BurguerKenzie:token");
         if(!!token){
             localStorage.removeItem("@BurguerKenzie:token");
             toast.info("Conta desconectada");
-            setCart([])
         };
     };
 

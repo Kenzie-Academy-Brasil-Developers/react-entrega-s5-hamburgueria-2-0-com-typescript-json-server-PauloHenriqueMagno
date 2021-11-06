@@ -7,7 +7,6 @@ interface ICart{
     cart: IProduct[],
     setCart: Function,
     setToken: Function,
-    loadCart: () => void,
     addToCart: (product: IProduct, message?: boolean) => void,
     removeFromCart: (product: IProduct, message?: boolean) => void,
     clearCart: (message?: boolean) => void,
@@ -23,27 +22,24 @@ interface ISave{
 const CartContext = createContext<ICart>({} as ICart);
 
 export const CartProvider = ({children}: IProvider) => {
-    const [cart, setCart] = useState([]);
-    const [id, setId] = useState(localStorage.getItem("@BurguerKenzie:id"));
-    const [token, setToken] = useState(localStorage.getItem("@BurguerKenzie:token"));
+    const [cart, setCart] = useState<IProduct[]>([]);
+    const [id, setId] = useState<any>(localStorage.getItem("@BurguerKenzie:id"));
+    const [token, setToken] = useState<any>(localStorage.getItem("@BurguerKenzie:token"));
 
     useEffect(()=>{
         setId(localStorage.getItem("@BurguerKenzie:id"));
         setToken(localStorage.getItem("@BurguerKenzie:token"));
-        loadCart();
-    }, []);
 
-    const loadCart = () => {
         api
-            .get(`users/${id}`, {
+            .get(`/users/${id}`, {
                 headers: {
                     Authorization: `Bearer ${token}`
                 }
             })
             .then(response => {
-                setCart(response.data.cart)
-            });
-    };
+                setCart(response.data.cart);
+            })
+    }, []);
 
     const saveChange = ({data, success, error, message}: ISave ) => {
         api
@@ -53,13 +49,13 @@ export const CartProvider = ({children}: IProvider) => {
                 }
             })
             .then(response => {
+                setCart(data.cart);
                 message && toast.success(success);
             })
             .catch(err => {
                 message && toast.error(error);
             });
-            
-        loadCart();
+
     };
 
     const addToCart = (product: IProduct, message: boolean = true) => {
@@ -105,7 +101,6 @@ export const CartProvider = ({children}: IProvider) => {
 
     const clearCart = (message: boolean= true) => {
         const data = { "cart": [] }
-
         saveChange({data: data, success:"Carrinho esvaziado", error: "Erro em esvaziar o carrinho", message})
     };
 
@@ -115,7 +110,6 @@ export const CartProvider = ({children}: IProvider) => {
                 cart,
                 setCart,
                 setToken,
-                loadCart,
                 addToCart,
                 removeFromCart,
                 clearCart,

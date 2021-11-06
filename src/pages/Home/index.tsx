@@ -24,6 +24,7 @@ const Home = () => {
                 .catch(err => {
                     toast.error("Seu token expirou, faça login novamente");
                     localStorage.removeItem("@BurguerKenzie:token");
+                    localStorage.removeItem("@BurguerKenzie:id");
                     history.push("/login");
                 });
         }else{
