@@ -8,11 +8,11 @@ import { ProductList } from "./styled";
 
 const Home = () => {
     const { menu } = useMenuContext();
-    const history = useHistory()
+    const history = useHistory()   
     
     useEffect(() => {
-        const id = localStorage.getItem("@BurguerKenzie:id")
-        const token = localStorage.getItem("@BurguerKenzie:token")
+        const id = localStorage.getItem("@BurguerKenzie:id");
+        const token = localStorage.getItem("@BurguerKenzie:token");
 
         if(!!token){
             api
@@ -30,6 +30,8 @@ const Home = () => {
         }else{
             history.push("/login")
         }
+        
+    // eslint-disable-next-line
     }, []);
 
     return (

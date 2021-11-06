@@ -7,6 +7,7 @@ interface ICart{
     cart: IProduct[],
     setCart: Function,
     setToken: Function,
+    setId: Function,
     addToCart: (product: IProduct, message?: boolean) => void,
     removeFromCart: (product: IProduct, message?: boolean) => void,
     clearCart: (message?: boolean) => void,
@@ -39,6 +40,7 @@ export const CartProvider = ({children}: IProvider) => {
             .then(response => {
                 setCart(response.data.cart);
             })
+    // eslint-disable-next-line
     }, []);
 
     const saveChange = ({data, success, error, message}: ISave ) => {
@@ -110,6 +112,7 @@ export const CartProvider = ({children}: IProvider) => {
                 cart,
                 setCart,
                 setToken,
+                setId,
                 addToCart,
                 removeFromCart,
                 clearCart,

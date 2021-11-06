@@ -23,9 +23,15 @@ import { useState } from "react";
 const HeaderComponent = () => {
     const history = useHistory();
 
-    const [ isFocus, setIsFocus ] = useState(false)
-    const { setCart } = useCartContext()
-    const { SearchMenu } = useMenuContext()
+    const [ isFocus, setIsFocus ] = useState(false);
+    
+    const {
+        setCart,
+        setToken,
+        setId
+    } = useCartContext();
+
+    const { SearchMenu } = useMenuContext();
 
     const redirect = (string: string) => {
         history.push(string);
@@ -34,7 +40,11 @@ const HeaderComponent = () => {
     const logout = () => {
         redirect("/login");
         setCart([]);
+        setId("");
+        setToken("");
+
         const token = localStorage.getItem("@BurguerKenzie:token");
+
         if(!!token){
             localStorage.removeItem("@BurguerKenzie:token");
             toast.info("Conta desconectada");

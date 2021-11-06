@@ -63,6 +63,8 @@ const Signup = () => {
         if(!!localStorage.getItem("@BurguerKenzie:token")){
             redirect("/")
         }
+        
+    // eslint-disable-next-line
     },[])
 
     return (

@@ -25,7 +25,11 @@ interface ILogin{
 export const Login = () => {   
     const history = useHistory()
 
-    const { setCart, setToken } = useCartContext()
+    const {
+        setCart,
+        setToken,
+        setId
+    } = useCartContext()
 
     const redirect = (string: string) => {
         history.push(string);
@@ -38,10 +42,11 @@ export const Login = () => {
         api
             .post("/login", data)
             .then(response => {
-                setToken(response.data.accessToken);
-                setCart(response.data.user.cart);
                 localStorage.setItem("@BurguerKenzie:token", response.data.accessToken);
                 localStorage.setItem("@BurguerKenzie:id", response.data.user.id);
+                setToken(response.data.accessToken);
+                setId(response.data.user.id);
+                setCart(response.data.user.cart);
                 toast.success("Bem vindo, " + response.data.user.name);
                 redirect("/");
             })
@@ -65,6 +70,7 @@ export const Login = () => {
         if(!!localStorage.getItem("@BurguerKenzie:token")){
             redirect("/")
         }
+    // eslint-disable-next-line
     },[])
 
     return (        
